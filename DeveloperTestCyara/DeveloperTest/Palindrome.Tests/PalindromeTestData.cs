@@ -13,8 +13,7 @@ namespace Palindrome.Tests
                 yield return "aabaa";
                 yield return "racecar";
                 yield return "aaaaaa";
-                yield return "";
-                yield return "<>/?/><";
+                yield return "a";
             }
         }
 
@@ -37,7 +36,6 @@ namespace Palindrome.Tests
                 yield return new object[] { "raceciar", new List<int> { 5 } };
                 yield return new object[] { "kabcba", new List<int> { 0 } };
                 yield return new object[] { "abcddcjba", new List<int> { 6 } };
-                yield return new object[] { "<>/?/5><", new List<int> { 5 } };
             }
         }
 
@@ -50,7 +48,7 @@ namespace Palindrome.Tests
                 yield return new object[] { "baba", new List<int> { 0, 3 } };
                 yield return new object[] { "abab", new List<int> { 0, 3 } };
                 yield return new object[] { "abcd45dcba", new List<int> { 4, 5 } };
-                yield return new object[] { "<>/?i/><", new List<int> { 3,4 } };
+                yield return new object[] { "ab", new List<int> { 0, 1 } };
             }
         }
     }

@@ -64,6 +64,21 @@ namespace DonutDelight
             return result?.FindAll(x => x!=0);
         }
 
+        public static List<KeyValuePair<int, int>> GetBoxCountForOrder(int orderSize)
+        {
+            List<int> order = GetOrderForSize(orderSize);
+            if (order == null) return null;
+
+            var boxCountDict = new Dictionary<int, int>();
+            BoxSizeList.ForEach(x => boxCountDict.Add(x, 0));
+
+            order.ForEach(s => boxCountDict[s] +=1);
+
+            var countForEachBox = boxCountDict.ToList().FindAll(b => b.Value != 0);
+
+            return countForEachBox;
+        }
+
         public static List<int> GetInvalidOrders(int n)
         {
             return GetMemoForderSize(n).FindAll(o => o.Boxes == null).Select(x => x.Size).ToList();
