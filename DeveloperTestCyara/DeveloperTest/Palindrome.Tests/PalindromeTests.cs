@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using NUnit.Framework;
 
@@ -55,6 +56,14 @@ namespace Palindrome.Tests
             {
                 var index = PalindromeTransform.GetTransformIndexes(s);
                 Assert.IsTrue(index == null);
+            }
+
+            [TestCaseSource(typeof(PalindromeTestData), nameof(PalindromeTestData.InvalidInputs))]
+            public void GetTransformIndexes_InvalidInput_ThrowException(string s)
+            {
+                Exception ex = Assert.Throws<Exception>(()=> PalindromeTransform.GetTransformIndexes(s));
+
+                Assert.That(ex.Message, Is.EqualTo(PalindromeTransform.INPUT_CONSTRAINT));
             }
         }
     }

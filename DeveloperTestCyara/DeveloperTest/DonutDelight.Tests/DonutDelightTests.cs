@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,6 +34,14 @@ namespace DonutDelight.Tests
 
                 Assert.IsTrue(containCorrectBox);
             }
+
+            [TestCaseSource(typeof(DonutDelightTestData), nameof(DonutDelightTestData.InvalidInput))]
+            public void GetOrderSize_InvalidInput_ThrowException(int n)
+            {
+                Exception ex = Assert.Throws<Exception>(() => OrderSizes.GetOrderForSize(n));
+
+                Assert.That(ex.Message, Is.EqualTo(OrderSizes.INPUT_CONSTRAINT));
+            }
         }
 
         [TestFixture]
@@ -43,7 +52,7 @@ namespace DonutDelight.Tests
             [SetUp]
             protected void SetUp()
             {
-                invalidOrderSizes = new List<int> { 0, 1, 2, 3, 5, 7, 11 };
+                invalidOrderSizes = new List<int> { 1, 2, 3, 5, 7, 11 };
             }
 
             [TestCase(50)]

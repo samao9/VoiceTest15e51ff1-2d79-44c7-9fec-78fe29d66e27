@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DonutDelight
@@ -7,11 +8,13 @@ namespace DonutDelight
     {
         public static readonly List<int> BoxSizeList = new List<int>() {20, 9, 6, 4};
 
+        public const string INPUT_CONSTRAINT = "Order should be greater than 0";
+
         public class Order
         {
             public int Size { get; }
 
-            public Order(int size) => this.Size = size;
+            public Order(int size) => Size = size;
 
             public List<int> Boxes { get; set; }
         }
@@ -25,8 +28,12 @@ namespace DonutDelight
         /// when we compute result for order size 100, assuming we first pick box size 20 for the solution
         /// we then need to pick boxes to make up for 100-20 = 80, memo[100] = 20 + memo[80](already computed)
         /// </remarks>
-        public static List<Order> GetMemoForderSize(int orderSize)
+        private static List<Order> GetMemoForderSize(int orderSize)
         {
+            if (orderSize <= 0)
+            {
+                throw  new  Exception(INPUT_CONSTRAINT);
+            }
             List<Order> memo = new List<Order>();
 
             // Pre populate memo
@@ -48,8 +55,6 @@ namespace DonutDelight
                     break;
                 }
             }
-
-            memo[0].Boxes = null;
 
             return memo;
         }

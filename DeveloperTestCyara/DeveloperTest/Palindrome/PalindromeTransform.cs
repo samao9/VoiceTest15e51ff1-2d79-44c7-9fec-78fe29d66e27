@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace Palindrome
 {
     public class PalindromeTransform
     {
+        public const string INPUT_CONSTRAINT = "All characters should be in the range ascii [a-z] (lowercase only)";
+
         // Function to check if a substring is palindrome
         public static bool IsPalindrome(string word, int leftIndex, int rightIndex)
         {
@@ -21,6 +26,19 @@ namespace Palindrome
             return true;
         }
 
+        private static bool CheckInput(string word)
+        {
+            // ascii[a-z] code is in range 97 - 122
+            var range = Enumerable.Range(97, 122).ToArray();
+            foreach (char c in word)
+            {
+                int unicode = c;
+                if (range.Contains(unicode)) continue;
+                return false;
+            }
+            return true;
+        }
+
         /// <summary>
         /// Function to check if a string can be transformed to palindrome by removing 1 char
         /// </summary>
@@ -30,6 +48,10 @@ namespace Palindrome
         /// </remarks>
         public static List<int> GetTransformIndexes(string word)
         {
+            if (!CheckInput(word))
+            {
+                throw new Exception(INPUT_CONSTRAINT);
+            }
             var indexes = new List<int>();
             int lPointer = 0;
             int rPointer = word.Length - 1;

@@ -24,18 +24,32 @@ namespace Palindrome.Tests
                 yield return "string";
                 yield return "ababab";
                 yield return "iracecar";
-                yield return "sdfasdfasdf";
+                yield return "asdfasdf";
             }
         }
+
+        public static IEnumerable InvalidInputs
+        {
+            get
+            {
+                yield return " ";
+                yield return "0";
+                yield return "!";
+                yield return "a0a";
+                yield return "a?a";
+                yield return "a&0a";
+            }
+        }
+
 
         public static IEnumerable TransformableOneSol
         {
             get
             {
-                yield return new object[] { "raicecar", new List<int> { 2 } };
-                yield return new object[] { "raceciar", new List<int> { 5 } };
-                yield return new object[] { "kabcba", new List<int> { 0 } };
-                yield return new object[] { "abcddcjba", new List<int> { 6 } };
+                yield return new object[] {"raicecar", new List<int> {2}};
+                yield return new object[] {"raceciar", new List<int> {5}};
+                yield return new object[] {"kabcba", new List<int> {0}};
+                yield return new object[] {"abcddcbaj", new List<int> {8}};
             }
         }
 
@@ -43,12 +57,9 @@ namespace Palindrome.Tests
         {
             get
             {
-                yield return new object[] { "raciecar", new List<int> { 3, 4 } };
-                yield return new object[] { "raci car", new List<int> { 3, 4 } };
-                yield return new object[] { "baba", new List<int> { 0, 3 } };
-                yield return new object[] { "abab", new List<int> { 0, 3 } };
-                yield return new object[] { "abcd45dcba", new List<int> { 4, 5 } };
-                yield return new object[] { "ab", new List<int> { 0, 1 } };
+                yield return new object[] {"raciecar", new List<int> {3, 4}};
+                yield return new object[] {"baba", new List<int> {0, 3}};
+                yield return new object[] {"ab", new List<int> {0, 1}};
             }
         }
     }

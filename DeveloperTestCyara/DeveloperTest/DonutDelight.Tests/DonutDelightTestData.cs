@@ -5,7 +5,7 @@ namespace DonutDelight.Tests
 {
     public class DonutDelightTestData
     {
-        private static readonly List<int> invalidOrderSizes = new List<int> { 0, 1, 2, 3, 5, 7, 11 };
+        private static readonly List<int> invalidOrderSizes = new List<int> { 1, 2, 3, 5, 7, 11 };
 
         private static List<int> sampleValidValue = new List<int> { 21, 22, 4, 16, 77, 89 , 103, 371 };
 
@@ -28,6 +28,15 @@ namespace DonutDelight.Tests
                 {
                     yield return i;
                 }
+            }
+        }
+
+        public static IEnumerable InvalidInput
+        {
+            get
+            {
+                yield return 0;
+                yield return -1;
             }
         }
     }
