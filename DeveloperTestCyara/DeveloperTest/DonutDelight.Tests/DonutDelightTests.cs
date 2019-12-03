@@ -64,5 +64,45 @@ namespace DonutDelight.Tests
                 Assert.AreEqual(invalidOrderSizes, actual);
             }
         }
+
+        [TestFixture]
+        public class GetBoxCountForOrderTests
+        {
+            [TestCaseSource(typeof(DonutDelightTestData), nameof(DonutDelightTestData.InvalidOrderSizes))]
+            public void GetBoxCountForOrder_Invalid_ReturnNull(int s)
+            {
+                var result = OrderSizes.GetBoxCountForOrder(s);
+
+                Assert.IsTrue(result == null);
+            }
+
+            [TestCaseSource(typeof(DonutDelightTestData), nameof(DonutDelightTestData.SampleValidValue))]
+            public void GetBoxCountForOrder_ValidSizeN_ReturnSumToN(int n)
+            {
+                var boxCountResult = OrderSizes.GetBoxCountForOrder(n);
+
+                var actual = boxCountResult.Select(b => b.Value * b.Key).Sum();
+
+                Assert.AreEqual(n, actual);
+            }
+
+            [TestCaseSource(typeof(DonutDelightTestData), nameof(DonutDelightTestData.SampleValidValue))]
+            public void GetBoxCountForOrder_ValidSizeN_ReturnContainsCorrectBoxSize(int n)
+            {
+                var boxCountResult = OrderSizes.GetBoxCountForOrder(n);
+
+                bool containCorrectBox = boxCountResult.TrueForAll(x => OrderSizes.BoxSizeList.Contains(x.Key));
+
+                Assert.IsTrue(containCorrectBox);
+            }
+
+            [TestCaseSource(typeof(DonutDelightTestData), nameof(DonutDelightTestData.InvalidInput))]
+            public void GetBoxCountForOrder_InvalidInput_ThrowException(int n)
+            {
+                Exception ex = Assert.Throws<Exception>(() => OrderSizes.GetOrderForSize(n));
+
+                Assert.That(ex.Message, Is.EqualTo(OrderSizes.INPUT_CONSTRAINT));
+            }
+        }
     }
 }

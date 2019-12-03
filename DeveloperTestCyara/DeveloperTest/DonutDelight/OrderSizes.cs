@@ -59,7 +59,7 @@ namespace DonutDelight
             return memo;
         }
 
-        // Return null if invalid
+        // Return null if orderSize invalid
         public static List<int> GetOrderForSize(int orderSize)
         {
             var memo = GetMemoForderSize(orderSize);
@@ -69,6 +69,7 @@ namespace DonutDelight
             return result?.FindAll(x => x!=0);
         }
 
+        // Return null if orderSize invalid
         public static List<KeyValuePair<int, int>> GetBoxCountForOrder(int orderSize)
         {
             List<int> order = GetOrderForSize(orderSize);
