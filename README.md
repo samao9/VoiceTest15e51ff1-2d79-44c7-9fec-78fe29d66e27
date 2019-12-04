@@ -3,7 +3,7 @@ Q1
 1a) 
   Even number greater than 8 can be consist of combination of 4s and 6s
   Proof:
-   4 = 2*2 , 6 =2*3
+   4 = 2x2 , 6 =2x3
   All even numbers are consist of either even or odd number of 2s
   For all V > 8:
   All V= 2*N (N is even) can be consist of 4s
