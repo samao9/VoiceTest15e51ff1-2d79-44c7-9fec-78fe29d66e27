@@ -9,7 +9,7 @@ Q1
   All V= 2*N (N is even) can be consist of 4s
   All V= 2*N (N is odd) can be consist of 4s and 6s
 
-  Odd number Greater than 11 can be turn into even by -9
+  Odd number Greater than 11 can be turned into even by -9
   So all odd number > 11 is valid
 
   So the invalids are 1, 2, 3, 5, 7, 11 
