@@ -15,9 +15,9 @@ Q1
   So the invalids are 1, 2, 3, 5, 7, 11 
   
   1b)
-  run DonutDelight.Program
+  run DonutDelight.Program,
   see DonutDelight.OrderSizes.GetBoxCountForOrder
   
   Q2
-  run Palindrome.Program
+  run Palindrome.Program,
   see Palindrome.PalindromeTransform.GetTransformIndexes
