@@ -14,10 +14,7 @@ namespace Palindrome
         {
             while (leftIndex < rightIndex)
             {
-                if (word[leftIndex] != word[rightIndex])
-                {
-                    return false;
-                }
+                if (word[leftIndex] != word[rightIndex]) return false;
 
                 leftIndex++;
                 rightIndex--;
@@ -58,7 +55,8 @@ namespace Palindrome
 
             while (lPointer <= rPointer && indexes.Count == 0)
             {
-                if (word[lPointer] != word[rPointer])
+                if (word[lPointer] == word[rPointer]) { lPointer++; rPointer--; }
+                else
                 {
                     mismatchCount++;
                     if (mismatchCount > 1)
@@ -78,11 +76,6 @@ namespace Palindrome
                     // Check if remove right pointer will result in a palindrome
                     if (word[lPointer] != word[rPointer - 1]) continue;
                     if (IsSubStringPalindrome(word, lPointer, rPointer - 1)) indexes.Add(rPointer);
-                }
-                else
-                {
-                    lPointer++;
-                    rPointer--;
                 }
             }
 
