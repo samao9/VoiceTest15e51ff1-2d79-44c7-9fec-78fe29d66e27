@@ -67,7 +67,7 @@ namespace Palindrome.Tests
             {
                 Exception ex = Assert.Throws<Exception>(()=> PalindromeTransform.GetTransformIndexes(s));
 
-                Assert.That(ex.Message, Is.EqualTo(PalindromeTransform.INPUT_CONSTRAINT));
+                Assert.That(ex.Message, Is.EqualTo(PalindromeTransform.InputConstraint));
             }
 
             [Test]

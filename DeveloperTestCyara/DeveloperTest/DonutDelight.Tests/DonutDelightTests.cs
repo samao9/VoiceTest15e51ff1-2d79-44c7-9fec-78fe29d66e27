@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework.Constraints;
 
 namespace DonutDelight.Tests
 {
@@ -41,19 +40,19 @@ namespace DonutDelight.Tests
             {
                 Exception ex = Assert.Throws<Exception>(() => OrderSizes.GetOrderForSize(n));
 
-                Assert.That(ex.Message, Is.EqualTo(OrderSizes.INPUT_CONSTRAINT));
+                Assert.That(ex.Message, Is.EqualTo(OrderSizes.InputConstraint));
             }
         }
 
         [TestFixture]
         public class GetInvalidOrdersMethodTests
         {
-            private List<int> invalidOrderSizes;
+            private List<int> _invalidOrderSizes;
 
             [SetUp]
             protected void SetUp()
             {
-                invalidOrderSizes = new List<int> { 1, 2, 3, 5, 7, 11 };
+                _invalidOrderSizes = new List<int> { 1, 2, 3, 5, 7, 11 };
             }
 
             [TestCase(50)]
@@ -62,7 +61,7 @@ namespace DonutDelight.Tests
             {
                 var actual = OrderSizes.GetInvalidOrders(n);
 
-                Assert.AreEqual(invalidOrderSizes, actual);
+                Assert.AreEqual(_invalidOrderSizes, actual);
             }
         }
 
@@ -77,8 +76,8 @@ namespace DonutDelight.Tests
                 Assert.IsTrue(result == null);
             }
 
-            [TestCaseSource(typeof(DonutDelightTestData), nameof(DonutDelightTestData.SampleValidValue))]
-            public void GetBoxCountForOrder_ValidSizeN_ReturnSumToN(int n)
+            [Test]
+            public void GetBoxCountForOrder_ValidSizeN_ReturnSumToN([Random(12,200,10)]int n)
             {
                 var boxCountResult = OrderSizes.GetBoxCountForOrder(n);
 
@@ -88,7 +87,7 @@ namespace DonutDelight.Tests
             }
 
             [Test]
-            public void GetBoxCountForOrder_ValidSizeN_ReturnContainsCorrectBoxSize(int n)
+            public void GetBoxCountForOrder_ValidSizeN_ReturnContainsCorrectBoxSize([Random(12, 200, 10)]int n)
             {
                 var boxCountResult = OrderSizes.GetBoxCountForOrder(n);
 
@@ -102,7 +101,7 @@ namespace DonutDelight.Tests
             {
                 Exception ex = Assert.Throws<Exception>(() => OrderSizes.GetOrderForSize(n));
 
-                Assert.That(ex.Message, Is.EqualTo(OrderSizes.INPUT_CONSTRAINT));
+                Assert.That(ex.Message, Is.EqualTo(OrderSizes.InputConstraint));
             }
         }
     }

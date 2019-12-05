@@ -8,7 +8,7 @@ namespace DonutDelight
     {
         public static readonly List<int> BoxSizeList = new List<int>() {20, 9, 6, 4};
 
-        public const string INPUT_CONSTRAINT = "Order should be greater than 0";
+        public const string InputConstraint = "Order should be greater than 0";
 
         public class Order
         {
@@ -32,7 +32,7 @@ namespace DonutDelight
         {
             if (orderSize <= 0)
             {
-                throw  new  Exception(INPUT_CONSTRAINT);
+                throw  new  Exception(InputConstraint);
             }
             List<Order> memo = new List<Order>();
 

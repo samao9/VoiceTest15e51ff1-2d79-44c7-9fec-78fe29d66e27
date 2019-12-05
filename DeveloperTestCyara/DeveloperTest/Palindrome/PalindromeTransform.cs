@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 
@@ -8,7 +7,7 @@ namespace Palindrome
 {
     public class PalindromeTransform
     {
-        public const string INPUT_CONSTRAINT = "All characters should be in the range ascii [a-z] (lowercase only)";
+        public const string InputConstraint = "All characters should be in the range ascii [a-z] (lowercase only)";
 
         // Function to check if a substring is palindrome
         private static bool IsSubStringPalindrome(string word, int leftIndex, int rightIndex)
@@ -33,22 +32,8 @@ namespace Palindrome
             return IsSubStringPalindrome(word, 0, c);
         }
 
-        private static bool CheckInput(string word)
-        {
-            // ascii[a-z] code is in range 97 - 122
-            var range = Enumerable.Range(97, 26).ToArray();
-            foreach (char c in word)
-            {
-                int unicode = c;
-                if (range.Contains(unicode)) continue;
-                return false;
-            }
-            return true;
-        }
-
         private static bool CheckInputRegex(string word)
         {
-            // ascii[a-z] code is in range 97 - 122
             Regex lcaseA = new Regex("^[a-z]+$");
             return lcaseA.IsMatch(word);
         }
@@ -64,7 +49,7 @@ namespace Palindrome
         {
             if (!CheckInputRegex(word))
             {
-                throw new Exception(INPUT_CONSTRAINT);
+                throw new Exception(InputConstraint);
             }
             var indexes = new List<int>();
             int lPointer = 0;
