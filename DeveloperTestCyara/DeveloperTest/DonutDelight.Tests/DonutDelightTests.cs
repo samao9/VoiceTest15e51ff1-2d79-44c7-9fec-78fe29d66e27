@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Constraints;
 
 namespace DonutDelight.Tests
 {
@@ -86,7 +87,7 @@ namespace DonutDelight.Tests
                 Assert.AreEqual(n, actual);
             }
 
-            [TestCaseSource(typeof(DonutDelightTestData), nameof(DonutDelightTestData.SampleValidValue))]
+            [Test]
             public void GetBoxCountForOrder_ValidSizeN_ReturnContainsCorrectBoxSize(int n)
             {
                 var boxCountResult = OrderSizes.GetBoxCountForOrder(n);

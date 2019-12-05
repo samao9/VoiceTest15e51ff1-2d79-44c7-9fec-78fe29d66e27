@@ -12,14 +12,14 @@ namespace Palindrome.Tests
             [TestCaseSource(typeof(PalindromeTestData), nameof(PalindromeTestData.Palindrome))]
             public void IsPalindrome_Palindrome_ReturnTrue(string s)
             {
-                var result = PalindromeTransform.IsPalindrome(s, 0, s.Length - 1);
+                var result = PalindromeTransform.IsPalindrome(s);
                 Assert.IsTrue(result);
             }
 
             [TestCaseSource(typeof(PalindromeTestData), nameof(PalindromeTestData.NonPalindrome))]
-            public void IsPalindrome_NonPalindrome_ReturnTrue(string s)
+            public void IsPalindrome_NonPalindrome_ReturnFalse(string s)
             {
-                var result = PalindromeTransform.IsPalindrome(s, 0, s.Length - 1);
+                var result = PalindromeTransform.IsPalindrome(s);
                 Assert.IsFalse(result);
             }
         }
@@ -38,6 +38,11 @@ namespace Palindrome.Tests
             public void GetTransformIndexes_TwoSol_ReturnIndexes(string s, List<int> expected)
             {
                 var indexes = PalindromeTransform.GetTransformIndexes(s);
+
+                // sort the list, check equality, not order
+                expected.Sort();
+                indexes.Sort();
+
                 Assert.AreEqual(expected, indexes);
             }
 
@@ -63,6 +68,12 @@ namespace Palindrome.Tests
                 Exception ex = Assert.Throws<Exception>(()=> PalindromeTransform.GetTransformIndexes(s));
 
                 Assert.That(ex.Message, Is.EqualTo(PalindromeTransform.INPUT_CONSTRAINT));
+            }
+
+            [Test]
+            public void GetTransformIndexes_InputNull_ThrowException()
+            {
+                Assert.Throws<ArgumentNullException>(() => PalindromeTransform.GetTransformIndexes(null));
             }
         }
     }

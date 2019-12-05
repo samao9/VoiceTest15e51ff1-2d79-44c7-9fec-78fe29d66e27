@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 
 namespace Palindrome
@@ -10,7 +11,7 @@ namespace Palindrome
         public const string INPUT_CONSTRAINT = "All characters should be in the range ascii [a-z] (lowercase only)";
 
         // Function to check if a substring is palindrome
-        public static bool IsPalindrome(string word, int leftIndex, int rightIndex)
+        private static bool IsSubStringPalindrome(string word, int leftIndex, int rightIndex)
         {
             while (leftIndex < rightIndex)
             {
@@ -26,10 +27,16 @@ namespace Palindrome
             return true;
         }
 
+        public static bool IsPalindrome(string word)
+        {
+            var c = word.Length - 1;
+            return IsSubStringPalindrome(word, 0, c);
+        }
+
         private static bool CheckInput(string word)
         {
             // ascii[a-z] code is in range 97 - 122
-            var range = Enumerable.Range(97, 122).ToArray();
+            var range = Enumerable.Range(97, 26).ToArray();
             foreach (char c in word)
             {
                 int unicode = c;
@@ -37,6 +44,13 @@ namespace Palindrome
                 return false;
             }
             return true;
+        }
+
+        private static bool CheckInputRegex(string word)
+        {
+            // ascii[a-z] code is in range 97 - 122
+            Regex lcaseA = new Regex("^[a-z]+$");
+            return lcaseA.IsMatch(word);
         }
 
         /// <summary>
@@ -48,7 +62,7 @@ namespace Palindrome
         /// </remarks>
         public static List<int> GetTransformIndexes(string word)
         {
-            if (!CheckInput(word))
+            if (!CheckInputRegex(word))
             {
                 throw new Exception(INPUT_CONSTRAINT);
             }
@@ -70,7 +84,7 @@ namespace Palindrome
                     // Check if remove left pointer will result in a palindrome
                     if (word[lPointer + 1] == word[rPointer])
                     {
-                        if (IsPalindrome(word, lPointer + 1, rPointer))
+                        if (IsSubStringPalindrome(word, lPointer + 1, rPointer))
                         {
                             indexes.Add(lPointer);
                         }
@@ -78,7 +92,7 @@ namespace Palindrome
 
                     // Check if remove right pointer will result in a palindrome
                     if (word[lPointer] != word[rPointer - 1]) continue;
-                    if (IsPalindrome(word, lPointer, rPointer - 1)) indexes.Add(rPointer);
+                    if (IsSubStringPalindrome(word, lPointer, rPointer - 1)) indexes.Add(rPointer);
                 }
                 else
                 {

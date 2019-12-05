@@ -57,7 +57,7 @@ namespace Palindrome.Tests
         {
             get
             {
-                yield return new object[] {"raciecar", new List<int> {3, 4}};
+                yield return new object[] {"raciecar", new List<int> {4, 3}};
                 yield return new object[] {"baba", new List<int> {0, 3}};
                 yield return new object[] {"ab", new List<int> {0, 1}};
             }
