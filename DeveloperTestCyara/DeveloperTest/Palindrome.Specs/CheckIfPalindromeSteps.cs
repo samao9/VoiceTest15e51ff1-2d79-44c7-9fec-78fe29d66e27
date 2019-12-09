@@ -6,23 +6,32 @@ namespace Palindrome.Specs
     [Binding]
     public class CheckIfPalindromeSteps
     {
-        private bool result;
-        [Given(@"I have entered ""([a-z]*)"" as the input")]
+        private string _inputString;
+        private bool _result;
+        [Given(@"I have entered ""(.*)"" as the input")]
         public void GivenIHaveEnteredAsTheInput(string word)
         {
-            result = PalindromeTransform.IsPalindrome(word);
-        }
-        
-        [Then(@"I got a true as result")]
-        public void ThenIGotATrueAsResult()
-        {
-            Assert.AreEqual(true, result);
+            _inputString = word;
         }
 
-        [Then(@"I got a false as result")]
-        public void ThenIGotAFalseAsResult()
+        [When(@"I verfty if the input is palindrome")]
+        public void WhenIVerftyIfTheInputIsPalindrome()
         {
-            Assert.AreEqual(false, result);
+            _result = PalindromeTransform.IsPalindrome(_inputString);
         }
+
+        [Then(@"I should get true as result")]
+        public void ThenIShouldGetTrueAsResult()
+        {
+            Assert.AreEqual(true, _result);
+        }
+
+        [Then(@"I should get false as result")]
+        public void ThenIShouldGetFalseAsResult()
+        {
+            Assert.AreEqual(false, _result);
+        }
+
+
     }
 }
