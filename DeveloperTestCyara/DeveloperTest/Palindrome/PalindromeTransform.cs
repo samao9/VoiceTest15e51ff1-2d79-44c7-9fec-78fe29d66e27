@@ -9,30 +9,10 @@ namespace Palindrome
     {
         public const string InputConstraint = "All characters should be in the range ascii [a-z] (lowercase only)";
 
-        // Function to check if a substring is palindrome
-        private static bool IsSubStringPalindrome(string word, int leftIndex, int rightIndex)
-        {
-            while (leftIndex < rightIndex)
-            {
-                if (word[leftIndex] != word[rightIndex]) return false;
-
-                leftIndex++;
-                rightIndex--;
-            }
-
-            return true;
-        }
-
         public static bool IsPalindrome(string word)
         {
             var c = word.Length - 1;
             return IsSubStringPalindrome(word, 0, c);
-        }
-
-        private static bool CheckInputRegex(string word)
-        {
-            Regex lcaseA = new Regex("^[a-z]+$");
-            return lcaseA.IsMatch(word);
         }
 
         /// <summary>
@@ -81,5 +61,26 @@ namespace Palindrome
 
             return indexes;
         }
+
+        // Function to check if a substring is palindrome
+        private static bool IsSubStringPalindrome(string word, int leftIndex, int rightIndex)
+        {
+            while (leftIndex < rightIndex)
+            {
+                if (word[leftIndex] != word[rightIndex]) return false;
+
+                leftIndex++;
+                rightIndex--;
+            }
+
+            return true;
+        }
+
+        private static bool CheckInputRegex(string word)
+        {
+            Regex lcaseA = new Regex("^[a-z]+$");
+            return lcaseA.IsMatch(word);
+        }
+
     }
 }

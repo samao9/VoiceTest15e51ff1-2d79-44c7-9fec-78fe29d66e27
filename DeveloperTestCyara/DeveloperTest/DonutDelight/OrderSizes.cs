@@ -19,46 +19,6 @@ namespace DonutDelight
             public List<int> Boxes { get; set; }
         }
 
-        /// <summary>
-        /// Function to return a memo list that contains solution for all order size from 1 to orderSize
-        /// </summary>
-        /// <remarks>
-        /// Store the computed result for reuse
-        /// For example if we already computed the result for order size 80 and stored it in memo[80]
-        /// when we compute result for order size 100, assuming we first pick box size 20 for the solution
-        /// we then need to pick boxes to make up for 100-20 = 80, memo[100] = 20 + memo[80](already computed)
-        /// </remarks>
-        private static List<Order> GetMemoForderSize(int orderSize)
-        {
-            if (orderSize <= 0)
-            {
-                throw  new  Exception(InputConstraint);
-            }
-            List<Order> memo = new List<Order>();
-
-            // Pre populate memo
-            for (var i = 0; i <= orderSize; i++) memo.Add(new Order(i));
-            memo[0].Boxes = new List<int>() {0};
-
-            // Build the solution memo from bottom up
-            for (var i = 1; i <= orderSize; i++)
-            {
-                var cOrderSize = i;
-                foreach (var cBoxSize in BoxSizeList)
-                {
-                    if (cBoxSize > cOrderSize) continue;
-
-                    // If solution should include cBoxSize, check the solution for the remaining order sizes form the memo
-                    var remain = memo[cOrderSize - cBoxSize];
-                    if (remain.Boxes == null) continue;
-                    memo[cOrderSize].Boxes = new List<int>(remain.Boxes) {cBoxSize};
-                    break;
-                }
-            }
-
-            return memo;
-        }
-
         // Return null if orderSize invalid
         public static List<int> GetOrderForSize(int orderSize)
         {
@@ -88,6 +48,46 @@ namespace DonutDelight
         public static List<int> GetInvalidOrders(int n)
         {
             return GetMemoForderSize(n).FindAll(o => o.Boxes == null).Select(x => x.Size).ToList();
+        }
+
+        /// <summary>
+        /// Function to return a memo list that contains solution for all order size from 1 to orderSize
+        /// </summary>
+        /// <remarks>
+        /// Store the computed result for reuse
+        /// For example if we already computed the result for order size 80 and stored it in memo[80]
+        /// when we compute result for order size 100, assuming we first pick box size 20 for the solution
+        /// we then need to pick boxes to make up for 100-20 = 80, memo[100] = 20 + memo[80](already computed)
+        /// </remarks>
+        private static List<Order> GetMemoForderSize(int orderSize)
+        {
+            if (orderSize <= 0)
+            {
+                throw new Exception(InputConstraint);
+            }
+            List<Order> memo = new List<Order>();
+
+            // Pre populate memo
+            for (var i = 0; i <= orderSize; i++) memo.Add(new Order(i));
+            memo[0].Boxes = new List<int>() { 0 };
+
+            // Build the solution memo from bottom up
+            for (var i = 1; i <= orderSize; i++)
+            {
+                var cOrderSize = i;
+                foreach (var cBoxSize in BoxSizeList)
+                {
+                    if (cBoxSize > cOrderSize) continue;
+
+                    // If solution should include cBoxSize, check the solution for the remaining order sizes form the memo
+                    var remain = memo[cOrderSize - cBoxSize];
+                    if (remain.Boxes == null) continue;
+                    memo[cOrderSize].Boxes = new List<int>(remain.Boxes) { cBoxSize };
+                    break;
+                }
+            }
+
+            return memo;
         }
     }
 }

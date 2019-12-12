@@ -36,7 +36,7 @@ namespace Palindrome.Specs
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Check if palindrome", "\tIn order to verify if a string is palindrome\r\n\tAs a tester\r\n\tI want to be told t" +
-                    "rue/false if a string [a-z] is/not a palindrome", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "rue/false when a string is/not a palindrome", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
